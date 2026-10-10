@@ -73,6 +73,7 @@ actor UniFiClient {
             throw UniFiError.httpError(statusCode: -1)
         }
         guard httpResponse.statusCode == 200 else {
+            Self.logger.error("HTTP error \(httpResponse.statusCode) for \(url.path)")
             throw UniFiError.httpError(statusCode: httpResponse.statusCode)
         }
         return data
